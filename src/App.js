@@ -3,7 +3,7 @@ import "./app.css";
 
 function App() {
   return (
-    <div className="app-body vh-100">
+    <div className="app-body app-dark vh-100">
       <Navbar />
     </div>
   );

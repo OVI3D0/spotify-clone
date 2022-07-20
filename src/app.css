@@ -1,5 +1,12 @@
 .app-body {
     width: 100%;
+}
+
+.app-dark {
     background: rgb(72,32,176);
     background: linear-gradient(180deg, rgba(72,32,176,1) 0%, rgba(36,36,36,1) 20%, rgba(18,18,18,1) 100%);
+}
+
+.app-light {
+
 }
