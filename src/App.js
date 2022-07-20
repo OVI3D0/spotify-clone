@@ -1,9 +1,11 @@
+import Navbar from "./components/Navbar";
+import "./app.css";
 
 function App() {
   return (
-    <>
-      henlo world
-    </>
+    <div className="app-body vh-100">
+      <Navbar />
+    </div>
   );
 }
 
