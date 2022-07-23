@@ -7,7 +7,7 @@ import { reducerCases } from '../utils/Constants'
 import './sidebar.css'
 
 export default function Sidebar() {
-    const [{token, items}, dispatch] =useStateProvider()
+    const [{token, playlists}, dispatch] = useStateProvider()
 
     useEffect(() => {
         const getPlaylistData = async() => {
@@ -20,15 +20,37 @@ export default function Sidebar() {
                 }
             })
             const {items} = response.data
-            console.log(items)
-            dispatch({type: reducerCases.SET_PLAYLISTS, items})
+            const playlists = items.map(({ name, id }) => {
+                return { name, id }
+            })
+            dispatch({type: reducerCases.SET_PLAYLISTS, playlists})
+            console.log(playlists)
         }
         getPlaylistData()
     }, [token, dispatch])
 
+
+    
+
   return (
-    <div className='sidebar-body vh-100'>
-        Sidebar Filler
+    <div className='sidebar-body vh-100 d-flex flex-column ps-4'>
+        <img src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_White.png' className='sideLogo pt-4 pb-3' />
+        <div className='d-flex flex-column pb-4'>
+            <button className='btn btn-dark my-1 text-start'><i class="fa-solid fa-house pe-2"></i>Home</button>
+            <button className='btn btn-dark my-1 text-start'><i class="fa-solid fa-magnifying-glass pe-2"></i>Search</button>
+            <button className='btn btn-dark my-1 text-start'><i class="fa-solid fa-swatchbook pe-2"></i>Your Library</button>
+        </div>
+        <div className='d-flex flex-column'>
+            <button className='btn btn-dark my-1 text-start'><i class="fa-solid fa-square-plus pe-2"></i>Create Playlist</button>
+            <button className='btn btn-dark my-1 text-start'><i class="fa-solid fa-heart-circle-plus pe-2"></i>Liked Songs</button>
+            <button className='btn btn-dark my-1 text-start'><i class="fa-solid fa-bookmark pe-2"></i>Your Episodes</button>
+            <hr />
+        </div>
+        <ul>
+            {playlists.map(({ name, id }) => {
+                return <li className='my-3 playlists' key={id}>{name}</li>
+            })}
+        </ul>
     </div>
   )
 }
