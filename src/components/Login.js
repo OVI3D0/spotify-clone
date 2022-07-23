@@ -33,7 +33,7 @@ export default function Login() {
 
   return (
     <div className='vh-100 w-100 login-bg'>
-        <img src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png' />
+        <img src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png' alt='spotify logo' />
         <button onClick={handleClick} className="btn btn-dark">Connect with Spotify</button>
     </div>
   )

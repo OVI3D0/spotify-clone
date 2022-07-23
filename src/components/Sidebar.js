@@ -28,22 +28,20 @@ export default function Sidebar() {
         }
         getPlaylistData()
     }, [token, dispatch])
-
-
     
 
   return (
     <div className='sidebar-body vh-100 d-flex flex-column ps-4'>
-        <img src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_White.png' className='sideLogo pt-4 pb-3' />
+        <img src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_White.png' className='sideLogo pt-4 pb-3' alt='spotify logo' />
         <div className='d-flex flex-column pb-4'>
-            <button className='btn btn-dark my-1 text-start'><i class="fa-solid fa-house pe-2"></i>Home</button>
-            <button className='btn btn-dark my-1 text-start'><i class="fa-solid fa-magnifying-glass pe-2"></i>Search</button>
-            <button className='btn btn-dark my-1 text-start'><i class="fa-solid fa-swatchbook pe-2"></i>Your Library</button>
+            <button className='btn btn-dark my-1 text-start'><i className="fa-solid fa-house pe-2"></i>Home</button>
+            <button className='btn btn-dark my-1 text-start'><i className="fa-solid fa-magnifying-glass pe-2"></i>Search</button>
+            <button className='btn btn-dark my-1 text-start'><i className="fa-solid fa-swatchbook pe-2"></i>Your Library</button>
         </div>
         <div className='d-flex flex-column'>
-            <button className='btn btn-dark my-1 text-start'><i class="fa-solid fa-square-plus pe-2"></i>Create Playlist</button>
-            <button className='btn btn-dark my-1 text-start'><i class="fa-solid fa-heart-circle-plus pe-2"></i>Liked Songs</button>
-            <button className='btn btn-dark my-1 text-start'><i class="fa-solid fa-bookmark pe-2"></i>Your Episodes</button>
+            <button className='btn btn-dark my-1 text-start'><i className="fa-solid fa-square-plus pe-2"></i>Create Playlist</button>
+            <button className='btn btn-dark my-1 text-start'><i className="fa-solid fa-heart-circle-plus pe-2"></i>Liked Songs</button>
+            <button className='btn btn-dark my-1 text-start'><i className="fa-solid fa-bookmark pe-2"></i>Your Episodes</button>
             <hr />
         </div>
         <ul>
