@@ -1,4 +1,5 @@
 import React from 'react'
+import Main from './Main'
 import Sidebar from './Sidebar'
 
 import './spotify.css'
@@ -6,12 +7,9 @@ import './spotify.css'
 export default function Spotify() {
 
   return (
-    <>
-      <Sidebar />
-      {/* Main body will go here */}
-      <div className='d-inline text-white'>
-        hello
-      </div>
-    </>
+    <div className="">
+        <Sidebar />
+        <Main />
+    </div>
   )
 }
