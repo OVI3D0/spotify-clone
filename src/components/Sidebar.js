@@ -31,7 +31,7 @@ export default function Sidebar() {
     
 
   return (
-    <div className='sidebar-body vh-100 d-flex flex-column ps-4'>
+    <div className='sidebar-body vh-100 d-inline-flex flex-column ps-4'>
         <img src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_White.png' className='sideLogo pt-4 pb-3' alt='spotify logo' />
         <div className='d-flex flex-column pb-4'>
             <button className='btn btn-dark my-1 text-start'><i className="fa-solid fa-house pe-2"></i>Home</button>
