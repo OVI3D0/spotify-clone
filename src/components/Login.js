@@ -23,7 +23,14 @@ export default function Login() {
             'user-read-currently-playing',
             'user-read-recently-played',
             'user-read-playback-position',
-            'user-top-read'
+            'user-top-read',
+            'playlist-read-collaborative',
+            'playlist-modify-public',
+            'playlist-read-private',
+            'playlist-modify-private',
+            'user-library-modify',
+            'user-library-read',
+            'ugc-image-upload',
         ]
         // brings us to the new url with our variables
         window.location.href = `${apiUrl}?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=&${scope.join(
