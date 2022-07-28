@@ -28,21 +28,25 @@ export default function Main() {
         tracks: response.data.tracks.items
       })
     }
-      getInitialPlaylist() 
+      getInitialPlaylist()
     }
   }, [token, dispatch, selectedPlaylist])
 
+  function openArtist(link) {
+    window.open(link)
+  }
+
     return (
     <div className='main-body text-white'>
-      <h1 className='fs-1 pb-3'>{playList.title}</h1>
+      <h1 className='fs-1 mb-3'>{playList.title}</h1>
       {playList.tracks && playList.tracks.map((item) => {
         return (
-          <span key={item.track.id}>
-            <h2 className='fs-5 mt-2'>{item.track.name}</h2>
-            <li>{item.track.artists.map((artist) => {
-              return artist.name
-            })}</li>
-          </span>
+          <div key={item.track.id} className="song-body py-1 ps-1">
+            <h2 className='fs-5 mt-2 mb-1 song-title'>{item.track.name}</h2>
+            {item.track.artists.map((artist) => {
+              return <li className='artist my-1 fs-6' key={artist.id} onClick={()=> openArtist(artist.external_urls.spotify)}>{artist.name}</li>
+            })}
+          </div> 
         )
       })}
     </div>

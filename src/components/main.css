@@ -1,0 +1,12 @@
+.song-body:hover {
+    background-color: gray;
+}
+
+.song-title:hover, .artist:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.artist {
+    list-style: none;
+}

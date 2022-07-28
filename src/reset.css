@@ -50,4 +50,5 @@ table {
 
 html {
 	overflow-x: hidden;
+	overflow-y: scroll;
 }
