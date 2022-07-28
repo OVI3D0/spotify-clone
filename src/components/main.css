@@ -1,3 +1,7 @@
+.main-body {
+    overflow-y: scroll;
+}
+
 .song-body:hover {
     background-color: gray;
 }
@@ -6,7 +10,23 @@
     text-decoration: underline;
     cursor: pointer;
 }
+.song-title {
+    text-overflow: ellipsis;
+}
 
 .artist {
     list-style: none;
+    margin-left: 80px;
+}
+
+.fa-play {
+    cursor: pointer;
+    position: relative;
+    top: 10px;
+}
+
+.track-img {
+    height: 45px;
+    position: relative;
+    top: 30px;
 }

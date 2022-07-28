@@ -4,7 +4,8 @@ export const initialState = {
     token: null,
     playlists: [],
     userData: {},
-    selectedPlaylist: ""
+    selectedPlaylist: "",
+    selectedSong: {}
 }
 
 const reducer = (state, action) => {
@@ -33,6 +34,12 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 selectedPlaylist: action.id
+            }
+        case reducerCases.SELECTED_SONG:
+            return {
+                id: action.id,
+                title: action.title,
+                // maybe add more here
             }
         default: 
             return state;
