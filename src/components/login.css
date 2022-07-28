@@ -21,3 +21,9 @@
     left: 50%;
     transform: translate(-50%, 0%);
 }
+
+@media (min-width: 1800px) {
+    .login-bg button {
+        top: 60%;
+    }
+}

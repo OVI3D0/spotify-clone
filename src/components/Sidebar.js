@@ -9,6 +9,10 @@ import './sidebar.css'
 export default function Sidebar() {
     const [{token, playlists}, dispatch] = useStateProvider()
 
+    function handleClick(id) {
+        dispatch({type: reducerCases.SELECTED_PLAYLIST, id})
+    }
+
     useEffect(() => {
         const getPlaylistData = async() => {
             const response = await axios.get(
@@ -20,7 +24,6 @@ export default function Sidebar() {
                 }
             })
             const {items} = response.data
-            console.log(response)
             const playlists = items.map(({ name, id }) => {
                 return { name, id }
             })
@@ -28,7 +31,6 @@ export default function Sidebar() {
         }
         getPlaylistData()
     }, [token, dispatch])
-    
 
   return (
     <div className='sidebar-body vh-100 d-inline-flex flex-column ps-4'>
@@ -46,7 +48,9 @@ export default function Sidebar() {
         </div>
         <ul>
             {playlists.map(({ name, id }) => {
-                return <li className='my-3 playlists' key={id}>{name}</li>
+                return  (
+                    <li className='my-3 playlists' onClick={() => handleClick(id)} key={id}>{name}</li>
+                )
             })}
         </ul>
     </div>

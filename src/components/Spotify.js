@@ -1,5 +1,6 @@
 import React from 'react'
 import Main from './Main'
+import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 
 import './spotify.css'
@@ -7,9 +8,14 @@ import './spotify.css'
 export default function Spotify() {
 
   return (
-    <div className="">
+    <div className="row">
+      <div className='col sidecol'>
         <Sidebar />
-        <Main />
+      </div>
+      <div className='col'>
+        <div className='row'><Navbar /></div>
+        <div className='row'><Main /></div>
+      </div>
     </div>
   )
 }
