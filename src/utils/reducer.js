@@ -41,6 +41,7 @@ const reducer = (state, action) => {
                 selectedSong: {
                     songId: action.data.item.id,
                     songTitle: action.data.item.name,
+                    photo: action.data.item.album.images[0].url,
                     songArtists: action.data.item.artists.map(({name, id}) => {
                         return {
                             name: name,
