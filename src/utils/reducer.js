@@ -35,11 +35,20 @@ const reducer = (state, action) => {
                 ...state,
                 selectedPlaylist: action.id
             }
-        case reducerCases.SELECTED_SONG:
+        case reducerCases.CURRENTLY_PLAYING:
             return {
-                id: action.id,
-                title: action.title,
-                // maybe add more here
+                ...state,
+                selectedSong: {
+                    songId: action.data.item.id,
+                    songTitle: action.data.item.name,
+                    songArtists: action.data.item.artists.map(({name, id}) => {
+                        return {
+                            name: name,
+                            id: id,
+                        }
+                    })
+                    // maybe add more here
+                }
             }
         default: 
             return state;

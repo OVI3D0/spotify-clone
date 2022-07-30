@@ -47,7 +47,7 @@ export default function Sidebar() {
             <hr />
         </div>
         <ul>
-            {playlists.map(({ name, id }) => {
+            {playlists && playlists.map(({ name, id }) => {
                 return  (
                     <li className='my-3 playlists' onClick={() => handleClick(id)} key={id}>{name}</li>
                 )
