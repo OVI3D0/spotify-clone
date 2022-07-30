@@ -23,15 +23,21 @@ export default function Player() {
           if(data) {
             dispatch({type: reducerCases.CURRENTLY_PLAYING, data })
           }
-        //   console.log(response.data)
+          // console.log(response.data)
         //   setTimeout(getCurrentTrack, 5000)
       }
       getCurrentTrack()
+      console.log(selectedSong)
   }, [token, dispatch])
+
 
   return (
     <div className='player-body text-white'>
-        {Object.keys(selectedSong).length === 0 ? <p>nothing</p>:<p>something</p>}
+        {Object.keys(selectedSong).length === 0 ? <p>Nothing is playing! Select a song to start jamming.</p>
+        :
+        <>
+          <p>{selectedSong.songTitle}</p>
+        </>}
     </div>
   )
 }
