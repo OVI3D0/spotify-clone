@@ -23,19 +23,18 @@ export default function Player() {
           if(data) {
             dispatch({type: reducerCases.CURRENTLY_PLAYING, data })
           }
-      // setTimeout(getCurrentTrack, 5000)
+      setTimeout(getCurrentTrack, 5000)
       }
       getCurrentTrack()
-      console.log(selectedSong)
   }, [token, dispatch])
 
 
   return (
     <div className='player-body text-white'>
-        {Object.keys(selectedSong).length === 0 ? <p>Nothing is playing! Select a song to start jamming.</p>
+        {Object.keys(selectedSong).length === 0 ? <p className='text-center pt-4'>Nothing is playing! Select a song to start jamming.</p>
         :
         <>
-          <img src={selectedSong.photo} className="player-img ms-5 mt-2 d-inline-block" />
+          <img src={selectedSong.photo} className="player-img ms-5 mt-3 d-inline-block" />
           <p className='d-inline-block fs-5 ps-3'>
             {selectedSong.songTitle}
           <br />
