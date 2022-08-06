@@ -1,33 +1,34 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useStateProvider } from '../utils/StateProvider'
+import { reducerCases } from '../utils/Constants'
 
 // styles
 import './main.css'
 
 export default function Main() {
-  const [{token, selectedPlaylist, selectedSong}, dispatch] = useStateProvider()
+  const [{ token, selectedPlaylist, selectedSong }, dispatch] = useStateProvider()
   const [playList, setPlaylist] = useState({
     title: "",
     tracks: null
   })
 
   useEffect(() => {
-    if(selectedPlaylist) {
+    if (selectedPlaylist) {
       const getInitialPlaylist = async () => {
         const response = await axios.get(
-          `https://api.spotify.com/v1/playlists/${selectedPlaylist}`, 
+          `https://api.spotify.com/v1/playlists/${selectedPlaylist}`,
           {
-          headers: {
-              Authorization:"Bearer " +token,
+            headers: {
+              Authorization: "Bearer " + token,
               "Content-Type": "application/json"
-          }
-      })
-      setPlaylist({
-        title: response.data.name,
-        tracks: response.data.tracks.items
-      })
-    }
+            }
+          })
+        setPlaylist({
+          title: response.data.name,
+          tracks: response.data.tracks.items
+        })
+      }
       getInitialPlaylist()
     }
   }, [token, dispatch, selectedPlaylist])
@@ -36,13 +37,32 @@ export default function Main() {
     window.open(link)
   }
 
-  function handlePause() {
-    
+  async function handlePause() {
+    const pauseSong = await axios.get(
+      `https://api.spotify.com/v1/me/player/pause`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json"
+        }
+      })
+
+    return pauseSong
   }
 
-  function handleResume() {
-
+  async function handleResume(id) {
+    const currSong = await axios.get(
+      `https://api.spotify.com/v1/tracks/${id}`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json"
+        }
+      })
+      const { data } = currSong
+    dispatch({ type: reducerCases.CURRENTLY_PLAYING_MAIN, data })
   }
+
 
   return (
     <div className='main-body text-white'>
@@ -50,15 +70,15 @@ export default function Main() {
       {playList.tracks && playList.tracks.map((item) => {
         return (
           <div key={item.track.id} className="song-body pb-2 ps-2">
-            {item.track.id === selectedSong.songId ? <i className="fa-solid fa-pause" onClick={handlePause}></i> : <i className="fa-solid fa-play d-inline pe-2" onClick={handleResume}></i>}
-            <img src={item.track.album.images[0].url} className='track-img px-1' alt={`Album cover for the song: ${item.track.name}`} /> 
+            {item.track.id === selectedSong.songId ? <i className="fa-solid fa-pause" onClick={handlePause}></i> : <i className="fa-solid fa-play d-inline pe-2" onClick={()=> handleResume(item.track.id)}></i>}
+            <img src={item.track.album.images[0].url} className='track-img px-1' alt={`Album cover for the song: ${item.track.name}`} />
             <h2 className='fs-5 ms-2 d-inline-block song-title'>{item.track.name}</h2><br />
             <span className='artist mt-1'>
               {item.track.artists.map((artist) => {
-                return <span className='fs-6' key={artist.id} onClick={()=> openArtist(artist.external_urls.spotify)}>{artist.name}, </span>
+                return <span className='fs-6' key={artist.id} onClick={() => openArtist(artist.external_urls.spotify)}>{artist.name}, </span>
               })}
             </span>
-          </div> 
+          </div>
         )
       })}
     </div>

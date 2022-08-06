@@ -51,6 +51,22 @@ const reducer = (state, action) => {
                     // maybe add more here
                 }
             }
+        case reducerCases.CURRENTLY_PLAYING_MAIN:
+            return {
+                ...state,
+                selectedSong: {
+                    songId: action.data.id,
+                    songTitle: action.data.name,
+                    photo: action.data.album.images[0].url,
+                    songArtists: action.data.artists.map(({name, id}) => {
+                        return {
+                            name: name,
+                            id: id,
+                        }
+                    })
+                    // maybe add more here
+                }
+            }
         default: 
             return state;
     }
