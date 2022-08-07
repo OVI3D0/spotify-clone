@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useStateProvider } from '../utils/StateProvider'
 import axios from 'axios'
 import { reducerCases } from '../utils/Constants'
@@ -8,6 +8,7 @@ import './player.css'
 
 export default function Player() {
   const [{token, selectedSong}, dispatch] = useStateProvider()
+  const [time, setTime] = useState({})
 
   useEffect(() => {
       const getCurrentTrack = async() => {
@@ -20,6 +21,11 @@ export default function Player() {
               }
           })
           const { data } = response
+          setTime({
+            currTime: data.progress_ms,
+            totalTime: data.item.duration_ms
+          })
+          console.log(data)
           if(data) {
             dispatch({type: reducerCases.CURRENTLY_PLAYING, data })
           }
@@ -28,6 +34,11 @@ export default function Player() {
       getCurrentTrack()
   }, [token, dispatch])
 
+  function msToTime(ms) {
+    var minutes = Math.floor(ms / 60000);
+    var seconds = ((ms % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
 
   return (
     <div className='player-body text-white'>
@@ -38,13 +49,17 @@ export default function Player() {
           <p className='d-inline-block fs-5 ps-3'>
             {selectedSong.songTitle}
           <br />
-          <p className='fs-6'>
+          <span className='fs-6'>
             {selectedSong.songArtists.map((artist) => {
                 return <span key={artist.id}>{artist.name}, </span>
               })}
+          </span>
           </p>
-          </p>
-        </>}
+          <span className='playerBarContainer'>
+            <span className='playerBar'></span>
+          </span>
+        </>
+        }
     </div>
   )
 }

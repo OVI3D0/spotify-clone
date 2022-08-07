@@ -63,19 +63,18 @@ export default function Main() {
     dispatch({ type: reducerCases.CURRENTLY_PLAYING_MAIN, data })
   }
 
-
   return (
     <div className='main-body text-white'>
       <h1 className='fs-1 fw-bold mb-3'>{playList.title}</h1>
       {playList.tracks && playList.tracks.map((item) => {
         return (
           <div key={item.track.id} className="song-body pb-2 ps-2">
-            {item.track.id === selectedSong.songId ? <i className="fa-solid fa-pause" onClick={handlePause}></i> : <i className="fa-solid fa-play d-inline pe-2" onClick={()=> handleResume(item.track.id)}></i>}
+            {item.track.id === selectedSong.songId ? <i className="fa-solid fa-pause d-inline pe-2 isPlaying" onClick={handlePause}></i> : <i className="fa-solid fa-play d-inline pe-2" onClick={()=> handleResume(item.track.id)}></i>}
             <img src={item.track.album.images[0].url} className='track-img px-1' alt={`Album cover for the song: ${item.track.name}`} />
-            <h2 className='fs-5 ms-2 d-inline-block song-title'>{item.track.name}</h2><br />
+            <h2 className={item.track.id === selectedSong.songId ? 'fs-5 ms-2 d-inline-block song-title isPlaying' : 'fs-5 ms-2 d-inline-block song-title'}>{item.track.name}</h2><br />
             <span className='artist mt-1'>
               {item.track.artists.map((artist) => {
-                return <span className='fs-6' key={artist.id} onClick={() => openArtist(artist.external_urls.spotify)}>{artist.name}, </span>
+                return <span className={item.track.id === selectedSong.songId ? 'fs-6 isPlaying' : 'fs-6'} key={artist.id} onClick={() => openArtist(artist.external_urls.spotify)}>{artist.name}, </span>
               })}
             </span>
           </div>
