@@ -2,7 +2,7 @@
     width: 100%;
     position: sticky;
     bottom: 0;
-    height: 100px;
+    height: 120px;
     background-color: black;
 }
 
@@ -12,8 +12,22 @@
 
 .playerBarContainer {
     display: inline-block;
-    width: 40%;
-    height: 5px;
-    background-color: gray;
-    margin-left: 10%;
+    width: 60%;
+    height: 50%;
+    text-align: center;
+    position: relative;
+    top: 25%;
+}   
+
+.playerBar {
+    position: absolute;
+    bottom: 0;
+}
+
+.activeColor {
+    color: #1db954;
+}
+
+.fa-solid {
+    cursor: pointer;
 }

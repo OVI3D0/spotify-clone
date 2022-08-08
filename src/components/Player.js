@@ -21,15 +21,15 @@ export default function Player() {
               }
           })
           const { data } = response
-          setTime({
-            currTime: data.progress_ms,
-            totalTime: data.item.duration_ms
-          })
           console.log(data)
           if(data) {
             dispatch({type: reducerCases.CURRENTLY_PLAYING, data })
+            setTime({
+              currTime: data.progress_ms,
+              totalTime: data.item.duration_ms
+            })
           }
-      setTimeout(getCurrentTrack, 10000)
+      // setTimeout(getCurrentTrack, 10000)
       }
       getCurrentTrack()
   }, [token, dispatch])
@@ -41,23 +41,34 @@ export default function Player() {
   }
 
   return (
-    <div className='player-body text-white'>
+    <div className='player-body text-white row'>
         {Object.keys(selectedSong).length === 0 ? <p className='text-center pt-4'>Nothing is playing! Select a song to start jamming.</p>
         :
         <>
+        <div className='col-3'>
           <img src={selectedSong.photo} className="player-img ms-5 mt-3 d-inline-block" alt="" />
-          <p className='d-inline-block fs-5 ps-3'>
-            {selectedSong.songTitle}
-          <br />
-          <span className='fs-6'>
-            {selectedSong.songArtists.map((artist) => {
-                return <span key={artist.id}>{artist.name}, </span>
-              })}
-          </span>
-          </p>
+            <p className='d-inline-block fs-5 ps-3'>
+              {selectedSong.songTitle}
+            <br />
+            <span className='fs-6'>
+              {selectedSong.songArtists.map((artist) => {
+                  return <span className='fs-7' key={artist.id}>{artist.name}, </span>
+                })}
+            </span>
+            </p>
+        </div>
+        <div className='col ps-5'>
           <span className='playerBarContainer'>
-            <span className='playerBar'></span>
+                <span>
+                  <i className={selectedSong.shuffleState ? "fa-solid fa-shuffle px-3 fa-lg activeColor" : "fa-solid fa-shuffle px-3 fa-lg"}></i>
+                  <i className="fa-solid fa-angle-left px-3 fa-lg"></i>
+                  <i className={selectedSong.isPlaying ? "fa-solid fa-circle-pause px-3 fa-2xl" : "fa-solid fa-circle-play px-3 fa-2xl"}></i>
+                  <i className="fa-solid fa-angle-right fa-lg px-3"></i>
+                  <i className={selectedSong.repeatState === "off" ? "fa-solid fa-repeat px-3 fa-lg" : "fa-solid fa-repeat px-3 fa-lg activeColor"}></i>
+                </span>
+                <span className='playerBar'></span>
           </span>
+        </div>
         </>
         }
     </div>

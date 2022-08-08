@@ -47,7 +47,10 @@ const reducer = (state, action) => {
                             name: name,
                             id: id,
                         }
-                    })
+                    }),
+                    shuffleState: action.data.shuffle_state,
+                    repeatState: action.data.repeat_state, 
+                    isPlaying: action.data.is_playing
                     // maybe add more here
                 }
             }
