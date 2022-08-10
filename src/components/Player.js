@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useStateProvider } from '../utils/StateProvider'
 import axios from 'axios'
 import { reducerCases } from '../utils/Constants'
@@ -8,7 +8,6 @@ import './player.css'
 
 export default function Player() {
   const [{token, selectedSong}, dispatch] = useStateProvider()
-  const [time, setTime] = useState({})
 
   useEffect(() => {
       const getCurrentTrack = async() => {
@@ -24,13 +23,10 @@ export default function Player() {
           console.log(data)
           if(data) {
             dispatch({type: reducerCases.CURRENTLY_PLAYING, data })
-            setTime({
-              currTime: data.progress_ms,
-              totalTime: data.item.duration_ms
-            })
           }
-      // setTimeout(getCurrentTrack, 10000)
+      // setTimeout(getCurrentTrack, 1000)
       }
+      
       getCurrentTrack()
   }, [token, dispatch])
 
@@ -39,6 +35,9 @@ export default function Player() {
     var seconds = ((ms % 60000) / 1000).toFixed(0);
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
   }
+
+  let current = msToTime(selectedSong.currTime)
+  let total = msToTime(selectedSong.totalTime)
 
   return (
     <div className='player-body text-white row'>
@@ -66,7 +65,7 @@ export default function Player() {
                   <i className="fa-solid fa-angle-right fa-lg px-3"></i>
                   <i className={selectedSong.repeatState === "off" ? "fa-solid fa-repeat px-3 fa-lg" : "fa-solid fa-repeat px-3 fa-lg activeColor"}></i>
                 </span>
-                <span className='playerBar'></span>
+                <span className='playerBar'>{current}/{total}</span>
           </span>
         </div>
         </>

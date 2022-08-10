@@ -50,7 +50,9 @@ const reducer = (state, action) => {
                     }),
                     shuffleState: action.data.shuffle_state,
                     repeatState: action.data.repeat_state, 
-                    isPlaying: action.data.is_playing
+                    isPlaying: action.data.is_playing,
+                    currTime: action.data.progress_ms,
+                    totalTime: action.data.item.duration_ms,
                     // maybe add more here
                 }
             }
