@@ -14,14 +14,22 @@
     display: inline-block;
     width: 60%;
     height: 50%;
-    text-align: center;
     position: relative;
     top: 25%;
+    display: flex;
+    justify-content: center;
 }   
 
-.playerBar {
+.barContainer {
     position: absolute;
     bottom: 0;
+}
+
+.playerBar {
+    display: inline-block;
+    background-color: grey;
+    width: 70%;
+    height: 5px;
 }
 
 .activeColor {

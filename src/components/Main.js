@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useStateProvider } from '../utils/StateProvider'
-import { reducerCases } from '../utils/Constants'
 
 // styles
 import './main.css'
@@ -37,45 +36,19 @@ export default function Main() {
     window.open(link)
   }
 
-  async function handlePause() {
-    const pauseSong = await axios.get(
-      `https://api.spotify.com/v1/me/player/pause`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json"
-        }
-      })
-
-    return pauseSong
-  }
-
-  async function handleResume(id) {
-    const currSong = await axios.get(
-      `https://api.spotify.com/v1/tracks/${id}`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json"
-        }
-      })
-      const { data } = currSong
-    dispatch({ type: reducerCases.CURRENTLY_PLAYING_MAIN, data })
-  }
-
   return (
     <div className='main-body text-white'>
       <h1 className='fs-1 fw-bold mb-3'>{playList.title}</h1>
       {playList.tracks && playList.tracks.map((item) => {
         return (
           <div key={item.track.id} className="song-body pb-2 ps-2">
-            {item.track.id === selectedSong.songId ? <i className="fa-solid fa-pause d-inline pe-2 isPlaying" onClick={handlePause}></i> : <i className="fa-solid fa-play d-inline pe-2" onClick={()=> handleResume(item.track.id)}></i>}
+            {item.track.id === selectedSong.songId ? <i className="fa-solid fa-pause d-inline pe-2 isPlaying"></i> : <i className="fa-solid fa-play d-inline pe-2"></i>}
             <img src={item.track.album.images[0].url} className='track-img px-1' alt={`Album cover for the song: ${item.track.name}`} />
-            <h2 className={item.track.id === selectedSong.songId ? 'fs-5 ms-2 d-inline-block song-title isPlaying' : 'fs-5 ms-2 d-inline-block song-title'}>{item.track.name}</h2><br />
-            <span className='artist mt-1'>
-              {item.track.artists.map((artist) => {
-                return <span className={item.track.id === selectedSong.songId ? 'fs-6 isPlaying' : 'fs-6'} key={artist.id} onClick={() => openArtist(artist.external_urls.spotify)}>{artist.name}, </span>
-              })}
+            <h2 className={item.track.id === selectedSong.songId ? 'fs-5 ms-2 d-inline-block song-title isPlaying' : 'fs-5 ms-2 d-inline-block song-title'} onClick={() => openArtist(item.track.external_urls.spotify)}>{item.track.name}</h2><br />
+            <span className={item.track.id === selectedSong.songId ? 'fs-6 isPlaying artist mt-1' : 'fs-6 artist mt-1'}>
+              {item.track.artists.map(artist => {
+                return <span className='artistName' key={artist.id} onClick={() => openArtist(artist.external_urls.spotify)}>{artist.name}</span>
+              }).reduce((prev, curr) => [prev, ', ', curr])}
             </span>
           </div>
         )

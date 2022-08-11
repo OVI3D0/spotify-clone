@@ -6,7 +6,7 @@
     background-color: gray;
 }
 
-.song-title:hover, .artist:hover {
+.song-title:hover, .artistName:hover {
     text-decoration: underline;
     cursor: pointer;
 }

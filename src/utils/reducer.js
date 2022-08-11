@@ -42,10 +42,9 @@ const reducer = (state, action) => {
                     songId: action.data.item.id,
                     songTitle: action.data.item.name,
                     photo: action.data.item.album.images[0].url,
-                    songArtists: action.data.item.artists.map(({name, id}) => {
+                    songArtists: action.data.item.artists.map(artist => {
                         return {
-                            name: name,
-                            id: id,
+                            artist
                         }
                     }),
                     shuffleState: action.data.shuffle_state,
@@ -53,6 +52,7 @@ const reducer = (state, action) => {
                     isPlaying: action.data.is_playing,
                     currTime: action.data.progress_ms,
                     totalTime: action.data.item.duration_ms,
+                    songLink: action.data.item.external_urls.spotify,
                     // maybe add more here
                 }
             }

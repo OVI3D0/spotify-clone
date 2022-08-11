@@ -39,6 +39,10 @@ export default function Player() {
   let current = msToTime(selectedSong.currTime)
   let total = msToTime(selectedSong.totalTime)
 
+  function openArtist(link) {
+    window.open(link)
+  }
+
   return (
     <div className='player-body text-white row'>
         {Object.keys(selectedSong).length === 0 ? <p className='text-center pt-4'>Nothing is playing! Select a song to start jamming.</p>
@@ -47,12 +51,14 @@ export default function Player() {
         <div className='col-3'>
           <img src={selectedSong.photo} className="player-img ms-5 mt-3 d-inline-block" alt="" />
             <p className='d-inline-block fs-5 ps-3'>
-              {selectedSong.songTitle}
+              <span className='artistName' onClick={() => openArtist(selectedSong.songLink)}>
+                {selectedSong.songTitle}
+              </span>
             <br />
             <span className='fs-6'>
-              {selectedSong.songArtists.map((artist) => {
-                  return <span className='fs-7' key={artist.id}>{artist.name}, </span>
-                })}
+            {selectedSong.songArtists.map(artist => {
+                return <span className='fs-7 artistName' key={artist.id} onClick={() => openArtist(artist.artist.external_urls.spotify)}>{artist.artist.name}</span>
+              }).reduce((prev, curr) => [prev, ', ', curr])}
             </span>
             </p>
         </div>
@@ -65,7 +71,7 @@ export default function Player() {
                   <i className="fa-solid fa-angle-right fa-lg px-3"></i>
                   <i className={selectedSong.repeatState === "off" ? "fa-solid fa-repeat px-3 fa-lg" : "fa-solid fa-repeat px-3 fa-lg activeColor"}></i>
                 </span>
-                <span className='playerBar'>{current}/{total}</span>
+                <span className='barContainer w-100 text-center'>{current}<span className='playerBar mx-2'></span>{total}</span>
           </span>
         </div>
         </>
